@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+</head>
+<body>
+<br>
+<h3><a href="/logout">Logout</a></h3>
+<br>
+
+<form th:method="POST" th:action="@{/admin/save}" th:object="${user}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name" placeholder = "Enter name here"/>
+    <br/>
+    <label for="surName">Enter surName: </label>
+    <input type="text" th:field="*{surName}" id="surName" placeholder = "Enter surName here"/>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email" placeholder = "Enter email here"/>
+    <br/>
+    <br/>
+    <label for="password">Enter password: </label>
+    <input type="text" th:field="*{password}" id="password" placeholder = "Enter password here"/>
+    <br/>
+
+    <tr>
+        <td align="right">
+            <label for="roleSet">Security level: </label>
+        </td>
+        <td>
+            <select style = "width: 100%" multiple request size="2" name="checkRoles" id="roleSet">
+                <option value="ROLE_USER" selected>USER</option>
+                <option value="ROLE_ADMIN" selected>ADMIN</option>
+            </select>
+        </td>
+    </tr>
+
+    <input type="submit" value="Create new user"/>
+</form>
+<br>
+<br>
+<!--<a th:href="@{/}">Show all</a>-->
+</body>
+</html>
