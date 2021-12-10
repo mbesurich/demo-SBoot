@@ -18,13 +18,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("userServiceImpl")
-    @Autowired
+
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
         auth.userDetailsService(userDetailsService);
     }
 
@@ -59,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/crud").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated();
     }
 
     @Bean
