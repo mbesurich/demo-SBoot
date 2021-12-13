@@ -30,10 +30,40 @@ public class AdminController {
         model.addAttribute("users", userService.getAllUsers());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
+        model.addAttribute("newUser", new User());
         return "admin";
     }
 
-    @GetMapping("/new")
+
+    @PostMapping("/add")
+    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam("role") String role) {
+        user.setRoleSet(setNewRoles(role));
+        userService.addUser(user);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
+                       @RequestParam("lastName") String lastName, @RequestParam("email") String email,
+                       @RequestParam("password") String password, @RequestParam("role") String role) {
+        User user = userService.getUserById(id);
+        user.setName(name);
+        user.setSurName(lastName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setRoleSet(setNewRoles(role));
+        userService.addUser(user);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping("/delete")
+    public String deleteUserForm(@RequestParam("id") long id) {
+        userService.deleteUserById(id);
+        return "redirect:/admin";
+    }
+
+
+/*    @GetMapping("/new")
     public String newUserForm(Model model) {
         model.addAttribute("user", new User());
         Set<Role> roles = userService.getAllRoles();
@@ -46,9 +76,9 @@ public class AdminController {
         user.setRoleSet(ConvertStringToRolesFromDB(checkRoles));
         userService.addUser(user);
         return "redirect:/admin";
-    }
+    }*/
 
-    @GetMapping("/edit/{id}")
+/*    @GetMapping("/edit/{id}")
     public String editUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "update";
@@ -59,7 +89,7 @@ public class AdminController {
         user.setRoleSet(ConvertStringToRolesFromDB(checkRoles));
         userService.addUser(user);
         return "redirect:/admin";
-    }
+    }*/
 
     @GetMapping("/delete/{id}")
     public String deleteUserForm(@PathVariable("id") Long id) {
@@ -67,18 +97,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    private Set<Role> ConvertStringToRolesFromDB(String[] checkRoles) {
-        Set<Role> allRoles = userService.getAllRoles();
-        Set<Role> roleHashSet = new HashSet<>();
-        for (String rolesFromParam : checkRoles) {
-            roleHashSet.add(
-                    allRoles
-                            .stream()
-                            .filter(r -> r.getName().equals(rolesFromParam))
-                            .findFirst()
-                            .get()
-            );
+    private Set<Role> setNewRoles(String newRoles) {
+        Set<Role> roles = new HashSet<>();
+        if (newRoles.contains(", ")) {
+            roles.add(userService.getRoleByName("ROLE_USER"));
+            roles.add(userService.getRoleByName("ROLE_ADMIN"));
+        } else {
+            roles.add(userService.getRoleByName(newRoles));
         }
-        return roleHashSet;
+        return roles;
     }
 }
