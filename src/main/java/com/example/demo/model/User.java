@@ -24,6 +24,9 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String surName;
 
+    @Column(name = "age")
+    private int age;
+
     @Column(name = "email")
     private String email;
 
@@ -98,12 +101,21 @@ public class User implements UserDetails {
         return roleSet;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roleSet=" + roleSet +

@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users
     id        INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name      VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
+    age       INT          NOT NULL,
     email     VARCHAR(255) NOT NULL,
     password  VARCHAR(255) NOT NULL
 )
@@ -40,7 +41,7 @@ INSERT INTO roles
 VALUES (2, 'ROLE_ADMIN');
 
 INSERT INTO users
-VALUES (1, 'Admin', 'Admin', 'Admin', 'Admin');
+VALUES (1, 'Admin', 'Admin', 10, 'Admin', 'Admin');
 
 INSERT INTO user_roles
 VALUES (1, 1);
