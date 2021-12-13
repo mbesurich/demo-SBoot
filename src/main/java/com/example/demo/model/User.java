@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -107,6 +108,15 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 ", roleSet=" + roleSet +
                 '}';
+    }
+
+    @Transient
+    public String getStringRoles() {
+        return this.getRoleSet()
+                .stream()
+                .map(r -> r.getName())
+                .map(s -> s.substring(s.indexOf('_') + 1))
+                .collect(Collectors.joining(" "));
     }
 
     @Override
