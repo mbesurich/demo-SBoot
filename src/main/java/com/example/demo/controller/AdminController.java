@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ public class AdminController {
     @GetMapping
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         return "admin";
     }
 
