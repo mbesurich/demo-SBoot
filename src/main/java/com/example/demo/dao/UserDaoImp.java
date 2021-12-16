@@ -15,16 +15,17 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public void addUser(User user) {
-        if (user.getId() == null) {
-            em.persist(user);
-        } else {
-            em.merge(user);
-        }
+        em.persist(user);
+    }
+
+    @Override
+    public void update(User user) {
+        em.merge(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return em.createQuery("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roleSet").getResultList();
+        return em.createQuery("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roleSet", User.class).getResultList();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class UserDaoImp implements UserDao{
     @Override
     public User getUserByEmail(String email) {
         return (User) em
-                .createQuery("SELECT u FROM User u WHERE u.email LIKE :email")
+                .createQuery("SELECT u FROM User u WHERE u.email LIKE :email", User.class)
                 .setParameter("email", email)
                 .getSingleResult();
     }
