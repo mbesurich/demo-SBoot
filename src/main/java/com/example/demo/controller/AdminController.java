@@ -36,22 +36,27 @@ public class AdminController {
 
 
     @PostMapping("/add")
-    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam("role") String role) {
-        user.setRoleSet(setNewRoles(role));
+//    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam("role") String role) {
+    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
+        user.setRoleSet(userService.getRolesByNames(checkRoles));
+//        user.setRoleSet(setNewRoles(role));
         userService.addUser(user);
         return "redirect:/admin";
     }
 
     @PostMapping("/edit")
     public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
-                       @RequestParam("lastName") String lastName, @RequestParam("email") String email,
-                       @RequestParam("password") String password, @RequestParam("role") String role) {
+                       @RequestParam("lastName") String lastName, @RequestParam("age") int age, @RequestParam("email") String email,
+                       @RequestParam("password") String password, @RequestParam(value = "checkRoles") String[] checkRoles) {
+//                       @RequestParam("password") String password, @RequestParam("role") String role) {
         User user = userService.getUserById(id);
         user.setName(name);
         user.setSurName(lastName);
+        user.setAge(age);
         user.setEmail(email);
         user.setPassword(password);
-        user.setRoleSet(setNewRoles(role));
+        user.setRoleSet(userService.getRolesByNames(checkRoles));
+//        user.setRoleSet(setNewRoles(role));
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -91,7 +96,7 @@ public class AdminController {
         return "redirect:/admin";
     }*/
 
-    @GetMapping("/delete/{id}")
+/*    @GetMapping("/delete/{id}")
     public String deleteUserForm(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin";
@@ -106,5 +111,5 @@ public class AdminController {
             roles.add(userService.getRoleByName(newRoles));
         }
         return roles;
-    }
+    }*/
 }
