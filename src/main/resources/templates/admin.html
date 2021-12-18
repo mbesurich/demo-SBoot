@@ -133,7 +133,6 @@
                                                                name="Email" th:value="${user.email}"
                                                                th:name="email">
                                                     </div>
-
                                                     <div class="form-group text-center">
                                                         <label for="password0" class="center-block">
                                                             <span class="font-weight-bold">Password</span>
@@ -144,34 +143,19 @@
                                                                name="Password" th:value="${user.password}"
                                                                th:name="password">
                                                     </div>
-
-
                                                     <div class="form-group text-center">
                                                         <label for="roleSet0" class="center-block">
                                                             <span class="font-weight-bold">Role</span>
                                                         </label>
-
-
                                                         <select style="width: 100%" multiple request size="2"
                                                                 name="checkRoles" id="roleSet0">
                                                             <option value="ROLE_USER" selected>USER</option>
                                                             <option value="ROLE_ADMIN" selected>ADMIN</option>
                                                         </select>
-                                                        <!--<select id="roles0" class="form-control custom-select" size="2"
-                                                                th:name="role"
-                                                                multiple="multiple">
-                                                            <option value="ROLE_USER">ROLE_USER</option>
-                                                            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-                                                            <option value="ROLE_ADMIN, ROLE_USER">ROLE_ADMIN,
-                                                                ROLE_USER
-                                                            </option>
-                                                        </select>-->
                                                         <input name="id" type="hidden"
                                                                th:value="${user.id}"
                                                                th:name="id">
                                                     </div>
-
-
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">
@@ -301,7 +285,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputAge" class=" font-weight-bold">Age</label>
-                                        <input type="age" th:field="*{age}" class="form-control"
+                                        <input type="number" th:field="*{age}" class="form-control"
                                                id="exampleInputAge"
                                                placeholder="Enter your Age">
                                     </div>
