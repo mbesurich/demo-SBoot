@@ -10,7 +10,7 @@
     <title>Users</title>
 </head>
 <body>
-<nav class="navbar  navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <strong><span th:text="${user.email}"></span></strong> with roles: <span
             th:text="${user.getStringRoles()}"></span></a>
@@ -119,7 +119,7 @@
                                                         </label>
                                                         <input type="text"
                                                                class="form-control collection-ville text-center"
-                                                               id="Age0"
+                                                               id="age0"
                                                                name="Age" th:value="${user.getAge()}"
                                                                th:name="age">
                                                     </div>
