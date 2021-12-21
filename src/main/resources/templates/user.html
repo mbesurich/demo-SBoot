@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,65 +9,69 @@
     <title>User page</title>
 </head>
 <body>
-<nav class="navbar  navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <strong><span th:text="${user.email}"></span></strong> with roles: <span
             th:text="${user.getStringRoles()}"></span></a>
-    <a class="nav-item " href="/logout">Logout</a>
+    <a class="nav-link disabled" href="/logout"><h5>Logout</h5></a>
 </nav>
-<!--<div class="container-fluid">-->
-<!--    <div class="row">-->
 <div class="container-fluid d-flex flex-column">
     <div class="row" style="height:100vh;">
 
-
-        <div class="col-sm-2 mt-2 bg-light">
+        <div class="col-sm-2 mt-2 px-0">
             <nav class="d-none d-sm-block sidebar">
-                <nav class="sidebar">
-                    <ul class="nav nav-pills nav-fill flex-column">
-                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="bg-light text-dark">
+                    <nav class="sidebar">
+                        <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   href="/admin">Admin</a>
+                                <a class="nav-link  active" href="/admin">Admin</a>
                             </li>
-                        </div>
-                        <li class="nav-item active">
-                            <a class="nav-link active" href="/user">User</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="col mt-3"></div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user">User</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </nav>
         </div>
-        <div class="col-sm bg-green">
-            <h1 class="h3 ml-3 mb-3 mt-2 font-bold">User information-page</h1>
-            <a class="h4 ml-3" id="home-tab" data-toggle="tab"
-               aria-controls="home" aria-selected="true">About user</a>
-            <div class="col mt-3">
-                <table class="table">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Last name</th>
-                        <th>Age</th>
-                        <th>E-Mail</th>
-                        <th>Password</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <td th:text="${user.getId()}"/>
-                    <td th:text="${user.getName()}"/>
-                    <td th:text="${user.getSurName()}"/>
-                    <td th:text="${user.getAge()}"/>
-                    <td th:text="${user.getEmail()}"/>
-                    <td th:text="${user.password}"/>
-                    </tbody>
-                </table>
-            </div>
+
+
+        <div class="col-sm bg-light text-dark">
+            <h1 class="mx-4 my-4 font-bold">User information-page</h1>
+            <ul class="list-group my-0">
+                <li class="list-group-item bg-light text-dark">
+                    <h4>
+                        About user
+                    </h4>
+                </li>
+                <li class="list-group-item">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Last name</th>
+                            <th>Age</th>
+                            <th>E-Mail</th>
+                            <th>Password</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <td th:text="${user.getId()}"/>
+                        <td th:text="${user.getName()}"/>
+                        <td th:text="${user.getSurName()}"/>
+                        <td th:text="${user.getAge()}"/>
+                        <td th:text="${user.getEmail()}"/>
+                        <td th:text="${user.password}"/>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
