@@ -8,15 +8,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-
     <link rel="stylesheet" href="test.css">
-<!--<style>
-
-    customtag {
-        backgound-color: #ffeb99
-    }
-
-</style>-->
 
 
     <title>Users</title>
@@ -26,7 +18,11 @@
     <a class="navbar-brand" href="#">
         <strong><span th:text="${user.email}"></span></strong> with roles: <span
             th:text="${user.getStringRoles()}"></span></a>
-    <a class="nav-link disabled" href="/logout"><h5>Logout</h5></a>
+    <a class="nav-link" href="/logout">
+        <font size="4" color="#a9a9a9">
+            Logout
+        </font>
+    </a>
 </nav>
 
 <div class="container-fluid d-flex flex-column">
@@ -36,9 +32,12 @@
                 <div class="bg-light text-dark">
                     <nav class="sidebar">
                         <ul class="nav nav-pills flex-column">
+
                             <li class="nav-item">
                                 <a class="nav-link  active" href="/admin">Admin</a>
                             </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link" href="/user">User</a>
                             </li>
@@ -333,16 +332,15 @@
                                           align="center">
                                         <div class="form-group">
                                             <label for="exampleInputName" class=" font-weight-bold">First Name</label>
-<!--                                            <customtag>-->
 
 
-                                            <input type="text" th:field="*{name}"
-                                                   class="form-control bg-custom-color text-dark"
-                                                   id="exampleInputName"
-                                                   placeholder="Enter your name">
+<!--                                                    <div class="examplethree">-->
+                                                        <input type="text" th:field="*{name}"
+                                                               class="form-control bg-warning text-dark"
+                                                               id="exampleInputName"
+                                                               placeholder="Enter your name">
+<!--                                                    </div>-->
 
-
-<!--                                            </customtag>-->
 
 
                                         </div>

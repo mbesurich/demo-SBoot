@@ -13,7 +13,11 @@
     <a class="navbar-brand" href="#">
         <strong><span th:text="${user.email}"></span></strong> with roles: <span
             th:text="${user.getStringRoles()}"></span></a>
-    <a class="nav-link disabled" href="/logout"><h5>Logout</h5></a>
+    <a class="nav-link" href="/logout">
+        <font size="4" color="#a9a9a9">
+            Logout
+        </font>
+    </a>
 </nav>
 <div class="container-fluid d-flex flex-column">
     <div class="row" style="height:100vh;">
@@ -23,9 +27,16 @@
                 <div class="bg-light text-dark">
                     <nav class="sidebar">
                         <ul class="nav nav-pills flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link  active" href="/admin">Admin</a>
-                            </li>
+
+
+
+
+                            <th:block th:if="${isAdmin}">
+                                <li class="nav-item">
+                                    <a class="nav-link  active" href="/admin">Admin</a>
+                                </li>
+
+                            </th:block>
                             <li class="nav-item">
                                 <a class="nav-link" href="/user">User</a>
                             </li>
