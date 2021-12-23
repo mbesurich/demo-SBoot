@@ -35,7 +35,7 @@ public class AdminController {
 
 
     @PostMapping("/add")
-    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
+    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") Role[] checkRoles) {
         user.setRoleSet(userService.getRolesByNames(checkRoles));
         userService.addUser(user);
         return "redirect:/admin";
@@ -44,7 +44,8 @@ public class AdminController {
     @PostMapping("/edit")
     public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
                        @RequestParam("lastName") String lastName, @RequestParam("age") int age, @RequestParam("email") String email,
-                       @RequestParam("password") String password, @RequestParam(value = "checkRoles") String[] checkRoles) {
+                       @RequestParam("password") String password, @RequestParam(value = "checkRoles") Role[] checkRoles) {
+        System.out.println(checkRoles);
         userService.update(id, name, lastName, age, email, password, userService.getRolesByNames(checkRoles));
         return "redirect:/admin";
     }

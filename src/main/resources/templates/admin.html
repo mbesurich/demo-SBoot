@@ -167,10 +167,18 @@
                                                                                    th:name="password">
                                                                         </div>
                                                                         <div class="form-group text-center">
-                                                                            <label for="roleSet0" class="center-block">
+                                                                            <label for="roleSet" class="center-block">
                                                                                 <span class="font-weight-bold">Role</span>
                                                                             </label>
-                                                                            <select style="width: 100%" multiple request
+
+<!--                                                                            <select th:field="${user.roleSet}" style="width: 100%" multiple request name="checkRoles" id="roleSet0">-->
+                                                                            <select th:name="role" tyle="width: 100%" multiple request name="checkRoles" id="roleSet0">
+<!--                                                                                <option th:each="role : ${user.roleSet}" th:value="${role}" th:text="${role}">-->
+                                                                                <option th:each="role : ${user.roleSet}" th:value="${role}" th:text="${role}" selected>
+                                                                                </option>
+                                                                            </select>
+
+                                                                           <!-- <select style="width: 100%" multiple request
                                                                                     size="2"
                                                                                     name="checkRoles" id="roleSet0">
                                                                                 <option value="ROLE_USER" selected>
@@ -179,7 +187,9 @@
                                                                                 <option value="ROLE_ADMIN" selected>
                                                                                     ADMIN
                                                                                 </option>
-                                                                            </select>
+                                                                            </select>-->
+
+
                                                                             <input name="id" type="hidden"
                                                                                    th:value="${user.id}"
                                                                                    th:name="id">

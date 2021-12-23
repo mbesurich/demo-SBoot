@@ -29,7 +29,7 @@ public class RoleDaoImp implements RoleDao{
     }
 
     @Override
-    public Set<Role> getRolesByNames(String[] names) {
+    public Set<Role> getRolesByNames(Role[] names) {
         StringBuilder sb = new StringBuilder();
         String[] roles = new String[names.length];
         sb.append("SELECT r FROM Role r WHERE ");
@@ -41,7 +41,7 @@ public class RoleDaoImp implements RoleDao{
         }
         TypedQuery<Role> query = em.createQuery(sb.toString(), Role.class);
         for (int i = 0; i < names.length; i++) {
-            query.setParameter("role" + i, names[i]);
+            query.setParameter("role" + i, names[i].getName());
         }
         return new HashSet<>(query.getResultList());
     }

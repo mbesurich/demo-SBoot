@@ -14,6 +14,6 @@ public interface UserService {
     void deleteUserById(Long id);
     Set<Role> getAllRoles();
     Role getRoleByName(String name);
-    Set<Role> getRolesByNames(String[] names);
+    Set<Role> getRolesByNames(Role[] names);
     User getUserByEmail(String email);
 }

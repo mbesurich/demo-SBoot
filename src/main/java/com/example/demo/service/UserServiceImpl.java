@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Set<Role> getRolesByNames(String[] names) {
+    public Set<Role> getRolesByNames(Role[] names) {
         return roleDao.getRolesByNames(names);
     }
 
