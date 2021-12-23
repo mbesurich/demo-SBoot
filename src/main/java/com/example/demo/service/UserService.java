@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface UserService {
     void addUser(User user);
-    void update(User user);
+    public void update(Long id, String name, String lastName, int age, String email, String password, Set<Role> roles);
     List<User> getAllUsers();
     User getUserById(Long id);
     void deleteUserById(Long id);

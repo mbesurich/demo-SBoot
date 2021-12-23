@@ -45,14 +45,7 @@ public class AdminController {
     public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
                        @RequestParam("lastName") String lastName, @RequestParam("age") int age, @RequestParam("email") String email,
                        @RequestParam("password") String password, @RequestParam(value = "checkRoles") String[] checkRoles) {
-        User user = userService.getUserById(id);
-        user.setName(name);
-        user.setSurName(lastName);
-        user.setAge(age);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setRoleSet(userService.getRolesByNames(checkRoles));
-        userService.addUser(user);
+        userService.update(id, name, lastName, age, email, password, userService.getRolesByNames(checkRoles));
         return "redirect:/admin";
     }
 

@@ -34,7 +34,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void update(User user) {
+    public void update(Long id, String name, String lastName, int age, String email, String password, Set<Role> roles) {
+        User user = userDao.getUserById(id);
+        user.setName(name);
+        user.setSurName(lastName);
+        user.setAge(age);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setRoleSet(roles);
         userDao.update(user);
     }
 
