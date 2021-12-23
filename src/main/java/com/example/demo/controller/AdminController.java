@@ -24,7 +24,6 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @Transactional
     @GetMapping
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
@@ -36,10 +35,8 @@ public class AdminController {
 
 
     @PostMapping("/add")
-//    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam("role") String role) {
     public String saveCustomer(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
         user.setRoleSet(userService.getRolesByNames(checkRoles));
-//        user.setRoleSet(setNewRoles(role));
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -48,7 +45,6 @@ public class AdminController {
     public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
                        @RequestParam("lastName") String lastName, @RequestParam("age") int age, @RequestParam("email") String email,
                        @RequestParam("password") String password, @RequestParam(value = "checkRoles") String[] checkRoles) {
-//                       @RequestParam("password") String password, @RequestParam("role") String role) {
         User user = userService.getUserById(id);
         user.setName(name);
         user.setSurName(lastName);
@@ -56,7 +52,6 @@ public class AdminController {
         user.setEmail(email);
         user.setPassword(password);
         user.setRoleSet(userService.getRolesByNames(checkRoles));
-//        user.setRoleSet(setNewRoles(role));
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -66,50 +61,4 @@ public class AdminController {
         userService.deleteUserById(id);
         return "redirect:/admin";
     }
-
-
-/*    @GetMapping("/new")
-    public String newUserForm(Model model) {
-        model.addAttribute("user", new User());
-        Set<Role> roles = userService.getAllRoles();
-        model.addAttribute("roles", roles);
-        return "new";
-    }
-
-    @PostMapping("/save")
-    public String newUserPost(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
-        user.setRoleSet(ConvertStringToRolesFromDB(checkRoles));
-        userService.addUser(user);
-        return "redirect:/admin";
-    }*/
-
-/*    @GetMapping("/edit/{id}")
-    public String editUserForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "update";
-    }
-
-    @PostMapping(value = "/update/{id}")
-    public String editUserPost(@PathVariable("id") Long id, @ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
-        user.setRoleSet(ConvertStringToRolesFromDB(checkRoles));
-        userService.addUser(user);
-        return "redirect:/admin";
-    }*/
-
-/*    @GetMapping("/delete/{id}")
-    public String deleteUserForm(@PathVariable("id") Long id) {
-        userService.deleteUserById(id);
-        return "redirect:/admin";
-    }
-
-    private Set<Role> setNewRoles(String newRoles) {
-        Set<Role> roles = new HashSet<>();
-        if (newRoles.contains(", ")) {
-            roles.add(userService.getRoleByName("ROLE_USER"));
-            roles.add(userService.getRoleByName("ROLE_ADMIN"));
-        } else {
-            roles.add(userService.getRoleByName(newRoles));
-        }
-        return roles;
-    }*/
 }

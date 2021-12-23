@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-//@EnableTransactionManagement
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -30,7 +28,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.roleDao = roleDao;
     }
 
-//    @Transactional
     @Override
     public void addUser(User user) {
         userDao.addUser(user);
@@ -41,31 +38,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDao.update(user);
     }
 
-//    @Transactional
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
-//    @Transactional
     @Override
     public User getUserById(Long id) {
         return userDao.getUserById(id);
     }
 
-//    @Transactional
     @Override
     public void deleteUserById(Long id) {
         userDao.deleteUserById(id);
     }
 
-//    @Transactional
     @Override
     public Set<Role> getAllRoles() {
         return roleDao.getAllRoles();
     }
 
-//    @Transactional
     @Override
     public Role getRoleByName(String name) {
         return roleDao.getRoleByName(name);
@@ -76,13 +68,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return roleDao.getRolesByNames(names);
     }
 
-//    @Transactional
     @Override
     public User getUserByEmail(String email) {
         return userDao.getUserByEmail(email);
     }
 
-//    @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDao.getUserByEmail(email);
