@@ -4,16 +4,11 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.Role;
 import com.example.demo.model.User;
-import org.thymeleaf.TemplateEngine;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +21,14 @@ public class AdminController {
         this.userService = userService;
     }
 
+/*    @ModelAttribute
+    public void addAttributes(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("currentUser", user);
+        model.addAttribute("allRoles", userService.getAllRoles());
+        model.addAttribute("newUser", new User());
+    }*/
+
     @GetMapping
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
@@ -35,19 +38,19 @@ public class AdminController {
         model.addAttribute("allRoles", userService.getAllRoles());
         return "admin";
     }
-
+/*
+    @GetMapping("/add")
+    public String addUser(Model model){
+        model.addAttribute("newUser", new User());
+        return "redirect:/admin";
+    }*/
 
     @PostMapping("/add")
-    public String saveCustomer(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
+    public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
         user.setRoleSet(userService.getRolesByNames(checkRoles));
         userService.addUser(user);
         return "redirect:/admin";
     }
-
-  /*  @GetMapping("edit")
-    public String getEdit(@RequestParam("id") Long id, Model model){
-        model.addAttribute("allRoles", userService.getAllRoles());
-    }*/
 
     @PostMapping("/edit")
     public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,

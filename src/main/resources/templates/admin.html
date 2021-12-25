@@ -112,6 +112,9 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
+                                                                        <input name="id" type="hidden"
+                                                                               th:value="${user.id}"
+                                                                               th:name="id">
                                                                         <div class="form-group text-center">
                                                                             <label for="name0" class="center-block">
                                                                                 <span class="font-weight-bold">First Name</span>
@@ -170,15 +173,14 @@
                                                                             <label for="roleSet" class="center-block">
                                                                                 <span class="font-weight-bold">Role</span>
                                                                             </label>
-                                                                            <select class="form-control" size="2" multiple="multiple" name="checkRoles" id="roleSet0">
+                                                                            <select class="form-control" size="2"
+                                                                                    multiple="multiple"
+                                                                                    name="checkRoles" id="roleSet0">
                                                                                 <option th:each="role : ${allRoles}"
                                                                                         th:value="${role}"
                                                                                         th:text="${role}">
                                                                                 </option>
                                                                             </select>
-                                                                            <input name="id" type="hidden"
-                                                                                   th:value="${user.id}"
-                                                                                   th:name="id">
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button"
@@ -224,6 +226,9 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
+                                                                        <input name="id" type="hidden"
+                                                                               th:value="${user.id}"
+                                                                               th:name="id">
                                                                         <div class="form-group text-center">
                                                                             <label for="name1" class="center-block">
                                                                                 <span class="font-weight-bold">First Name</span>
@@ -257,32 +262,17 @@
                                                                                    readonly="readonly">
                                                                         </div>
                                                                         <div class="form-group text-center">
-                                                                            <label for="roles1" class="center-block">
+                                                                            <label for="roleSet1" class="center-block">
                                                                                 <span class="font-weight-bold">Role</span>
                                                                             </label>
-                                                                            <select id="roles1"
-                                                                                    class="form-control custom-select"
-                                                                                    size="2"
-                                                                                    th:name="role"
+                                                                            <select class="form-control" size="2"
                                                                                     multiple="multiple"
-                                                                                    readonly="readonly">
-                                                                                <option value="ROLE_USER"
-                                                                                        readonly="readonly">
-                                                                                    ROLE_USER
-                                                                                </option>
-                                                                                <option value="ROLE_ADMIN"
-                                                                                        readonly="readonly">
-                                                                                    ROLE_ADMIN
-                                                                                </option>
-                                                                                <option value="ROLE_ADMIN, ROLE_USER"
-                                                                                        readonly="readonly">
-                                                                                    ROLE_ADMIN,
-                                                                                    ROLE_USER
+                                                                                    name="checkRoles" id="roleSet1">
+                                                                                <option th:each="role : ${allRoles}"
+                                                                                        th:value="${role}"
+                                                                                        th:text="${role}">
                                                                                 </option>
                                                                             </select>
-                                                                            <input name="id" type="hidden"
-                                                                                   th:value="${user.id}"
-                                                                                   th:name="id">
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button"
@@ -317,58 +307,68 @@
                                 <h4>Add new user</h4>
                             </li>
                             <li class="list-group-item">
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-md-5">
-                                <div class="container text-center">
-                                    <form action="#" th:action="@{/admin/add}" th:object="${newUser}" method="post"
-                                          align="center">
-                                        <div class="form-group">
-                                            <label for="exampleInputName" class=" font-weight-bold">First Name</label>
-                                            <input type="text" style="background-color: #ffeb99" th:field="*{name}"
-                                                   class="form-control text-dark"
-                                                   id="exampleInputName"
-                                                   placeholder="Enter your name">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="container text-center">
+                                            <form action="#" th:action="@{/admin/add}" th:object="${newUser}"
+                                                  method="post" align="center">
+                                                <div class="form-group">
+                                                    <label for="exampleInputName" class=" font-weight-bold">First
+                                                        Name</label>
+                                                    <input type="text" style="background-color: #ffeb99"
+                                                           th:field="*{name}"
+                                                           class="form-control text-dark"
+                                                           id="exampleInputName"
+                                                           placeholder="Enter your name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputLastName" class=" font-weight-bold">Last
+                                                        Name</label>
+                                                    <input type="text" style="background-color: #ffeb99"
+                                                           th:field="*{surName}"
+                                                           class="form-control text-dark"
+                                                           id="exampleInputLastName"
+                                                           placeholder="Enter your last name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputAge" class=" font-weight-bold">Age</label>
+                                                    <input type="number" th:field="*{age}" class="form-control"
+                                                           id="exampleInputAge"
+                                                           placeholder="Enter your Age">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail"
+                                                           class=" font-weight-bold">Email</label>
+                                                    <input type="email" style="background-color: #ffeb99"
+                                                           th:field="*{email}"
+                                                           class="form-control  text-dark"
+                                                           id="exampleInputEmail"
+                                                           placeholder="Enter your Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword"
+                                                           class=" font-weight-bold">Password</label>
+                                                    <input type="password" th:field="*{password}" class="form-control"
+                                                           id="exampleInputPassword"
+                                                           placeholder="Enter your Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="roleSet" class="center-block">
+                                                        <span class="font-weight-bold">Role</span>
+                                                    </label>
+                                                    <select class="form-control" size="2" multiple="multiple"
+                                                            name="checkRoles" id="roleSet">
+                                                        <option th:each="role : ${allRoles}"
+                                                                th:value="${role}"
+                                                                th:text="${role}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Add new user</button>
+                                            </form>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputLastName" class=" font-weight-bold">Last
-                                                Name</label>
-                                            <input type="text" style="background-color: #ffeb99" th:field="*{surName}"
-                                                   class="form-control text-dark"
-                                                   id="exampleInputLastName"
-                                                   placeholder="Enter your last name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputAge" class=" font-weight-bold">Age</label>
-                                            <input type="number" th:field="*{age}" class="form-control"
-                                                   id="exampleInputAge"
-                                                   placeholder="Enter your Age">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail" class=" font-weight-bold">Email</label>
-                                            <input type="email" style="background-color: #ffeb99" th:field="*{email}"
-                                                   class="form-control  text-dark"
-                                                   id="exampleInputEmail"
-                                                   placeholder="Enter your Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword" class=" font-weight-bold">Password</label>
-                                            <input type="password" th:field="*{password}" class="form-control"
-                                                   id="exampleInputPassword"
-                                                   placeholder="Enter your Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="roleSet" class="font-weight-bold">Role:</label>
-                                            <select class="form-control custom-select" multiple request size="2"
-                                                    name="checkRoles" id="roleSet">
-                                                <option value="ROLE_USER" selected>USER</option>
-                                                <option value="ROLE_ADMIN" selected>ADMIN</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-success">Add new user</button>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                             </li>
                         </ul>
                     </div>
