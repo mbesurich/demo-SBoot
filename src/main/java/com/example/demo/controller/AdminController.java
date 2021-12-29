@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.User;
 
-import java.util.Arrays;
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -38,12 +36,6 @@ public class AdminController {
         model.addAttribute("allRoles", userService.getAllRoles());
         return "admin";
     }
-/*
-    @GetMapping("/add")
-    public String addUser(Model model){
-        model.addAttribute("newUser", new User());
-        return "redirect:/admin";
-    }*/
 
     @PostMapping("/add")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
@@ -52,13 +44,10 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/edit")
-    public String edit(@RequestParam("id") Long id, @RequestParam("name") String name,
-                       @RequestParam("lastName") String lastName, @RequestParam("age") int age, @RequestParam("email") String email,
-                       @RequestParam("password") String password, @RequestParam(value = "checkRoles") String[] checkRoles) {
-        System.out.println("+++++++++++++length"+checkRoles.length);
-        Arrays.stream(checkRoles).forEach(s -> System.out.println(s));
-        userService.update(id, name, lastName, age, email, password, userService.getRolesByNames(checkRoles));
+    @PostMapping(value = "/edit")
+    public String editUserPost(@ModelAttribute("user") User user, @RequestParam(value = "checkRoles") String[] checkRoles) {
+        user.setRoleSet(userService.getRolesByNames(checkRoles));
+        userService.update(user);
         return "redirect:/admin";
     }
 
