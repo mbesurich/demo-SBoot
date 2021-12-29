@@ -115,7 +115,6 @@
                                                                     <div class="modal-body">
                                                                         <input type="hidden"
                                                                                id="id0"
-                                                                               name="id"
                                                                                th:value="*{id}"
                                                                                th:name="id">
                                                                         <div class="form-group text-center">
@@ -125,7 +124,6 @@
                                                                             <input type="text"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="name0"
-                                                                                   name="name"
                                                                                    th:value="*{name}"
                                                                                    th:name="name"/>
                                                                         </div>
@@ -136,7 +134,6 @@
                                                                             <input type="text"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="lastName0"
-                                                                                   name="Lastname"
                                                                                    th:value="*{surName}"
                                                                                    th:name="surName"/>
                                                                         </div>
@@ -147,7 +144,6 @@
                                                                             <input type="text"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="age0"
-                                                                                   name="Age"
                                                                                    th:value="*{age}"
                                                                                    th:name="age"/>
                                                                         </div>
@@ -158,7 +154,6 @@
                                                                             <input type="email"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="email0"
-                                                                                   name="Email"
                                                                                    th:value="*{email}"
                                                                                    th:name="email"/>
                                                                         </div>
@@ -169,7 +164,6 @@
                                                                             <input type="password"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="password0"
-                                                                                   name="Password"
                                                                                    th:value="*{password}"
                                                                                    th:name="password"/>
                                                                         </div>
@@ -177,9 +171,11 @@
                                                                             <label for="roleSet" class="center-block">
                                                                                 <span class="font-weight-bold">Role</span>
                                                                             </label>
-                                                                            <select class="form-control" size="2"
+                                                                            <select class="form-control"
+                                                                                    size="2"
                                                                                     multiple="multiple"
-                                                                                    name="checkRoles" id="roleSet0">
+                                                                                    th:name="checkRoles"
+                                                                                    id="roleSet0">
                                                                                 <option th:each="role : ${allRoles}"
                                                                                         th:value="${role}"
                                                                                         th:text="${role}">
@@ -216,13 +212,13 @@
                                                          aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
-                                                                <form action="#" th:action="@{/admin/delete}"
+                                                                <form th:action="@{/admin/delete}"
                                                                       th:object="${user}"
-                                                                      method="post">
+                                                                      th:method="post">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            th:attr="id='deleteModal'+ *{id}">Delete
-                                                                            user</h5>
+                                                                        <h5 class="modal-title" th:attr="id='deleteModal'+ *{id}">
+                                                                            Delete user
+                                                                        </h5>
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="modal"
                                                                                 aria-label="Close">
@@ -231,8 +227,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <input name="id" type="hidden"
-                                                                               th:value="*{id}"
-                                                                               th:name="id">
+                                                                               th:value="*{id}"/>
                                                                         <div class="form-group text-center">
                                                                             <label for="name1" class="center-block">
                                                                                 <span class="font-weight-bold">First Name</span>
@@ -240,7 +235,6 @@
                                                                             <input type="text"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="name1"
-                                                                                   name="name"
                                                                                    th:value="*{name}"
                                                                                    readonly="readonly">
                                                                         </div>
@@ -251,7 +245,6 @@
                                                                             <input type="text"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="lastName1"
-                                                                                   name="Lastname"
                                                                                    th:value="*{surName}"
                                                                                    readonly="readonly">
                                                                         </div>
@@ -262,7 +255,7 @@
                                                                             <input type="email"
                                                                                    class="form-control collection-ville text-center"
                                                                                    id="email1"
-                                                                                   name="Email" th:value="*{email}"
+                                                                                   th:value="*{email}"
                                                                                    readonly="readonly">
                                                                         </div>
                                                                         <div class="form-group text-center">
@@ -271,7 +264,7 @@
                                                                             </label>
                                                                             <select class="form-control" size="2"
                                                                                     multiple="multiple"
-                                                                                    name="checkRoles" id="roleSet1">
+                                                                                    id="roleSet1">
                                                                                 <option th:each="role : ${allRoles}"
                                                                                         th:value="${role}"
                                                                                         th:text="${role}">
@@ -314,7 +307,7 @@
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-md-5">
                                         <div class="container text-center">
-                                            <form action="#" th:action="@{/admin/add}" th:object="${newUser}"
+                                            <form th:action="@{/admin/add}" th:object="${newUser}"
                                                   method="post" align="center">
                                                 <div class="form-group">
                                                     <label for="exampleInputName" class=" font-weight-bold">First
@@ -336,7 +329,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputAge" class=" font-weight-bold">Age</label>
-                                                    <input type="number" th:field="*{age}" class="form-control"
+                                                    <input type="number"
+                                                           th:field="*{age}"
+                                                           class="form-control"
                                                            id="exampleInputAge"
                                                            placeholder="Enter your Age">
                                                 </div>
@@ -345,14 +340,16 @@
                                                            class=" font-weight-bold">Email</label>
                                                     <input type="email" style="background-color: #ffeb99"
                                                            th:field="*{email}"
-                                                           class="form-control  text-dark"
+                                                           class="form-control text-dark"
                                                            id="exampleInputEmail"
                                                            placeholder="Enter your Email">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword"
                                                            class=" font-weight-bold">Password</label>
-                                                    <input type="password" th:field="*{password}" class="form-control"
+                                                    <input type="password"
+                                                           th:field="*{password}"
+                                                           class="form-control"
                                                            id="exampleInputPassword"
                                                            placeholder="Enter your Password">
                                                 </div>
@@ -360,8 +357,11 @@
                                                     <label for="roleSet" class="center-block">
                                                         <span class="font-weight-bold">Role</span>
                                                     </label>
-                                                    <select class="form-control" size="2" multiple="multiple"
-                                                            name="checkRoles" id="roleSet">
+                                                    <select class="form-control"
+                                                            size="2"
+                                                            multiple="multiple"
+                                                            name="checkRoles"
+                                                            id="roleSet">
                                                         <option th:each="role : ${allRoles}"
                                                                 th:value="${role}"
                                                                 th:text="${role}">
